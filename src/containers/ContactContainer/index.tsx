@@ -3,50 +3,71 @@ import { useNavigate } from "react-router-dom";
 import { Button, Input, Text, Card, Table} from "../../components"
 import {useFormik} from "formik";
 import { useState } from "react";
-import { userLogin } from './../../api/authApi';
+// import { userLogin } from './../../api/authApi';
 // import GetProfile from "../Categories/GetProfile";
 import * as yup from"yup";
 import { LoginData } from "../../Interfaces/auth";
-
-// interface DataProps {
-
-//     email: string;
-//     password:string;
-// }
 
 const ContactContainer = () => {
 
     const [users, setUsers] = useState<LoginData[]>([]); 
     const Navigate = useNavigate();
+
+    const generateCustomToken = () => {
+        // Customize this function to generate your custom token logic
+        return Math.random().toString(36).substring(2) + Date.now().toString(36);
+    };
+
     const forMik = useFormik({
         initialValues: {
             email:"",
             password:"",
         },
-        // onSubmit: async (values, {resetForm}) => {
-        //     setUsers([...users, values])
-        //     resetForm()
-        
+     
         onSubmit: async (values: LoginData, {resetForm}) => {
             setUsers([...users, values])
-            resetForm()
-            try {
-                const response = await userLogin(values);
-                const token = response.data.data.token;
-                localStorage.setItem('token', token);        
+            resetForm();
+
+        //     try {
+        //         const response = await userLogin(values);
+        //         const token = response.data.data.token;
+        //         localStorage.setItem('token', token);        
                 
-                // const handleInsertToken = () => {}
+        //         // const handleInsertToken = () => {}
+        
+        //         console.log('Silahkan anda sudah login');
+        //       } catch (error) {
+        //         console.error(error);
+        //       }
+        // },
+
+            try {
+                // Generate a custom token locally
+                const customToken = generateCustomToken();
+        
+                // Custom token handling function
+                handleInsertToken(customToken);
         
                 console.log('Silahkan anda sudah login');
-              } catch (error) {
+        
+                // Navigate to the desired route upon successful login
+                Navigate('/WeatherApp');
+            } catch (error) {
                 console.error(error);
-              }
-        },
+            }
+            },
+        
         validationSchema: yup.object({
             email: yup.string().email('invalid email format, example => agus@example.com').required('Email is required'),
             password: yup.string().required(),            
         })
     });
+
+    const handleInsertToken = (token: string) => {
+        // Custom logic for handling the token
+        console.log('Custom logic for handling the token:', token);
+        localStorage.setItem('customToken', token);
+      };
 
     return (
 

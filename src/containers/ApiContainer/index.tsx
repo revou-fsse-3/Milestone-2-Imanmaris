@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 
 const ApiContainer = () => {
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("customToken");
     if (token) {
   
         return (

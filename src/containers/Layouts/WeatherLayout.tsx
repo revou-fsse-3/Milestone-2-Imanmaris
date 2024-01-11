@@ -5,7 +5,7 @@ import { Footer } from "../../components";
 
 const WeatherLayout = () => {
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('customToken');
     if (token) {
 
         return (
