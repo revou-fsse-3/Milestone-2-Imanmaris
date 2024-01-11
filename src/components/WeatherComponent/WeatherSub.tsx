@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import axios from 'axios';
 import './WeatherSub.css';
 import './DateUpdate';
 import { Card, Button } from "..";
@@ -9,6 +8,7 @@ import angin_icon from "../../components/Assets/angin.png";
 import humidity_icon from "../../components/Assets/humidity.png";
 import suhu_max from "../../components/Assets/suhumax.png";
 import DateUpdate from "./DateUpdate";
+import *as Yup from "yup";
 
 
 interface MainData {
@@ -60,10 +60,13 @@ const WeatherSub: React.FC = () => {
     const searchRef = useRef<HTMLInputElement | null>(null);
     const Navigate = useNavigate();
 
-    console.log(weather)
+    const searchSchema = Yup.object().shape({
+        searchTerm: Yup.string().required("Search term is required"),
+    });
+    // console.log(weather)
 
     const search = async () => {
-       let location = searchRef?.current?.value ? searchRef?.current?.value : "Indonesia";
+        let location = searchRef?.current?.value ? searchRef?.current?.value : "Indonesia";
        
         console.log(location);
 
@@ -75,54 +78,6 @@ const WeatherSub: React.FC = () => {
         // console.log (data);
         
     };
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-        
-    //         try {
-    //           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${api_key}`);
-    //           setData(response.data);
-    //         } catch (error) {
-    //           console.error('Error fetching data:', error);
-    //         }
-    //       };
-      
-    //       fetchData();
-
-    //     search();
-    // },[]);
-
-
-    // const WeatherSub: React.FC = () => {
-    //     const [api_key] = useState<string>("6e33f37dca5a8579ee77037a9d2d2929");
-    //     const [weather, setWeather] = useState<AppData | null>(null);
-    //     const searchRef = useRef<HTMLInputElement | null>(null);
-    //     const [data, setData] = useState<AppData[]>([]);
-    
-    //     const search = async () => {
-    //         try {
-    //             let location = searchRef?.current?.value ? searchRef?.current?.value : "Indonesia";
-    //             let response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${api_key}`);
-    //             setWeather(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //             // Handle the error (e.g., show an error message to the user)
-    //         }
-    //     };
-    
-    // const fetchDetail = async () => {
-    //     try {
-    //         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${api_key}`, 
-    //         {
-    //             method: 'GET',
-    //         })
-    //         const data = await response.json()
-    //         setDetail?.(data.data)
-    //     }
-    //     catch (error) {
-    //         console.error('Error fetching categories:', error);
-    //     }
-    // }
     
         useEffect(() => {
             // fetchDetail();
@@ -205,9 +160,12 @@ const WeatherSub: React.FC = () => {
                         </tbody>
                     </table>
 
-                    <Card border={false} className={'flex flex-wrap flex-col items-center'}>
-                        {/* <p className="mb-1 text-center text-sm text-slate-500"><b> Weather List </b></p> */}
-                        <Button label="Weather List Menu" onClick={() => Navigate('/ConnectApi')}className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+                    <Card border={false} className="mt-2 flex items-center justify-center space-x-4 text-sm font-semibold leading-6 text-slate-700">
+
+                        <Button label="Previous" onClick={() => Navigate('/Login')}className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+                        <div className="h-9 w-px bg-slate-500/50"/>
+                        <Button label="Next" onClick={() => Navigate('/ConnectApi')}className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+
                     </Card>
             </Card> 
 
