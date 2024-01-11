@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import axios from 'axios';
 import './WeatherSub.css';
 import './DateUpdate';
-import { Card } from "..";
+import { Card, Button } from "..";
 import search_icon from "../../components/Assets/search.png";
 import angin_icon from "../../components/Assets/angin.png";
 import humidity_icon from "../../components/Assets/humidity.png";
@@ -57,7 +58,7 @@ const WeatherSub: React.FC = () => {
     const [api_key] = useState<string>("6e33f37dca5a8579ee77037a9d2d2929");
     const [weather, setWeather] = useState<AppData>();
     const searchRef = useRef<HTMLInputElement | null>(null);
-    // const [detail, setDetail] = useState<AppData[]>([]);
+    const Navigate = useNavigate();
 
     console.log(weather)
 
@@ -138,7 +139,7 @@ const WeatherSub: React.FC = () => {
             </section>
 
             <section className="weather-image">
-                <img src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
+                <img className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
                 <p className="id-icon">{weather?.weather[0].description}</p>
             </section>
 
@@ -203,7 +204,13 @@ const WeatherSub: React.FC = () => {
                                 </tr>
                         </tbody>
                     </table>
+
+                    <Card border={false} className={'flex flex-wrap flex-col items-center'}>
+                        {/* <p className="mb-1 text-center text-sm text-slate-500"><b> Weather List </b></p> */}
+                        <Button label="Weather List Menu" onClick={() => Navigate('/ConnectApi')}className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+                    </Card>
             </Card> 
+
         </main>
     )
 }

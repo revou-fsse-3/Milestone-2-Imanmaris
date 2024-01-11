@@ -56,21 +56,20 @@
 .weather-image img {
     max-width: 100%;
     height: 225px;
-    background-color: rgba(66, 48, 28, 0.062);  
+    /* background-color: rgba(66, 48, 28, 0.062);   */
     backdrop-filter: blur(5px);
-    border-radius: 50%;
+    /* border-radius: 50%; */
     transition-timing-function: ease;
     /* transition: height 0.4s; */
     transition: background-color 0.4s;
 }
 
-.weather-image img:hover {
+/* .weather-image img:hover {
     max-width: 100%;
     /* height: 230px; */
-    background-color: rgba(66, 48, 28, 0.221);  
-    backdrop-filter: blur(5px);
-    border-radius: 50%;
-}
+    /* background-color: rgba(66, 48, 28, 0.221);   */
+    /* backdrop-filter: blur(5px); */
+    /* border-radius: 50%; } */
 
 .weather-status {
     display: flex;
@@ -116,6 +115,8 @@
     background-color: rgba(255, 255, 255, 0.751);  
     backdrop-filter: blur(10px);
     border-radius: 35px;
+    border: solid;
+    border-color:rgba(169, 169, 169, 0.463);
     cursor: pointer;
     max-width: 35%;
     height: auto;

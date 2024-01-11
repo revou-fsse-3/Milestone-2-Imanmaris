@@ -1,10 +1,11 @@
 
-import { Card } from "../../components";
-import { Navigate } from "react-router-dom";
+import { Card, Button } from "../../components";
+import { Navigate, useNavigate } from "react-router-dom";
 // import ListData from "../../components/WeatherComponent/ListData"
 
 const ApiContainer = () => {
 
+    const GoesTo = useNavigate();
     const token = localStorage.getItem("customToken");
     if (token) {
   
@@ -17,7 +18,14 @@ const ApiContainer = () => {
                 </Card>
 
                 {/* <ListData/> */}
- 
+
+                <Card border={false} className={'flex flex-wrap flex-col items-center'}>
+                        <p className="mb-1 text-center text-sm text-slate-500"><b> Emergency Menu </b></p>
+                        <Button label="Home" onClick={() => GoesTo('/')}className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+                        <Button label="Previous" onClick={() => GoesTo('/WeatherApp')}className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+
+                </Card>
+
             </Card>
         
         )
