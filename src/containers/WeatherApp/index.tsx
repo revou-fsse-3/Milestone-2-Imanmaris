@@ -1,9 +1,10 @@
+import WeatherSub from "../../components/WeatherComponent/WeatherSub";
 
 const WeatherApp = () => {
 
     return (
-        <div>
-
+        <div className="App">
+            <WeatherSub/>
         </div>
     )
 }

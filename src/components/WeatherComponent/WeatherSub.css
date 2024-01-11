@@ -1,0 +1,132 @@
+
+.container{
+    width: 607px;
+    height:829px;
+    margin:auto;
+    margin-top:5px;
+    border-radius: 5px 5px 12px 12px;
+    /* background-image: linear-gradient(180deg, rgb(255, 234, 0), rgba(111, 255, 0, 0.682)); */
+    background-image: url("https://img.freepik.com/free-vector/white-3d-modern-background-design_53876-87395.jpg?size=626&ext=jpg&ga=GA1.2.791611781.1699881713&semt=sph");
+}
+
+.top-bar{
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding-top: 20px;
+
+}
+
+.top-bar input {
+    display: flex;
+    width: 325px;
+    height: 50px;
+    background: #ebfffc;
+    border: solid;
+    outline: none;
+    border-radius: 40px;
+    padding-left: 40px;
+    color: #626262;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.search-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: solid;
+    background: #ebfffc;
+    border-radius: 35px;
+    cursor: pointer;
+}
+
+.weather-image {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.weather-image img {
+    max-width: 100%;
+    height: 225px;
+    background-color: rgba(66, 48, 28, 0.062);  
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    transition-timing-function: ease;
+    /* transition: height 0.4s; */
+    transition: background-color 0.4s;
+}
+
+.weather-image img:hover {
+    max-width: 100%;
+    /* height: 230px; */
+    background-color: rgba(66, 48, 28, 0.221);  
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+}
+
+.weather-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.weather-status .weather-temperature {
+    color: #141212;
+    font-size: 65px;
+    font-style: unset;
+    font-weight: 465;
+    margin-top: -20px;
+}
+
+.weather-status .weather-location {
+    color: #141212;
+    font-size: 29px;
+    font-weight: 400;
+}
+
+.data-container {
+    margin-top: 5%;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.element {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    gap: 12px;   
+}
+
+.element img {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.751);  
+    backdrop-filter: blur(10px);
+    border-radius: 35px;
+    cursor: pointer;
+    max-width: 35%;
+    height: auto;
+}
+
+.data h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+

@@ -3,7 +3,7 @@ import { HomeContainer, ContactContainer, ApiContainer, ProductContainer, Protec
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PublicLayout from './containers/Layouts/PublicLayout';
-import ProtectLayout from './containers/Layouts/ProtectLayout';
+// import ProtectLayout from './containers/Layouts/ProtectLayout';
 import WeatherLayout from './containers/Layouts/WeatherLayout';
 
 function App() {
@@ -47,16 +47,16 @@ function App() {
           element:<WeatherApp/>
       }
       )]
-    },
-    {
-      element: <ProtectLayout/>,
-      children: [(
-        {
-          path:'/ConnectApi', 
-          element:<ApiContainer/>
-        }
-      )]
     }
+    // {
+    //   element: <ProtectLayout/>,
+    //   children: [(
+    //     {
+    //       path:'/ConnectApi', 
+    //       element:<ApiContainer/>
+    //     }
+    //   )]
+    // }
   ])
 
   return (
