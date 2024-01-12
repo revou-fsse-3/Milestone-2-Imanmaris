@@ -50,6 +50,7 @@ interface AppData {
     name : string;
     coord : CoordinateData;
     sys : SysData
+    id:number;
 }
 
 
@@ -85,7 +86,7 @@ const WeatherSub: React.FC = () => {
         }, []);
 
     return (
-        <main className="container">
+        <main className="bg-sky-50/[.9] rounded-b-xl">
             <section className="top-bar">
                 <input type="text" className="cityInput " placeholder="Search" ref={searchRef} />
                 <div className="search-icon" onClick={()=>{(search())}}>
@@ -93,7 +94,93 @@ const WeatherSub: React.FC = () => {
                 </div>
             </section>
 
-            <section className="weather-image">
+            <section>
+                <Card border={false}>
+                    <section className="weather-image">
+                        <img className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
+                    </section>
+
+                    <section className="weather-status">
+                        <h1 className="weather-temperature">{weather?.main.temp +"°C"}</h1>
+                        <DateUpdate/>
+                        <h2 className="weather-location">{weather?.name}</h2>
+                    </section>
+
+                    <section className="data-container">
+                        <div className="element">
+                            <img src={humidity_icon} alt="logo kelembaban udara"/>
+                            <div className="data">
+                                <h3 className="humidity-percent">{weather?.main.humidity+"%"}</h3>
+                                <p className="text">Kelembaban</p>
+                            </div>
+                        </div>
+
+                        <div className="element">
+                            <img src={suhu_max} alt="logo temperatur maksimal"/>
+                            <div className="data">
+                                <h3 className="temperature-max">{weather?.main.temp_max+"°C"}</h3>
+                                <p className="text">Max-Temperature</p>
+                            </div>
+                        </div>
+
+                        <div className="element">
+                            <img src={angin_icon} alt="logo hembusan angin"/>
+                            <div className="data">
+                                <h3 className="wind-speed">{weather?.wind.speed + "MpH"}</h3>
+                                <p className="text">Kecepatan Angin</p>
+                            </div>
+                        </div>
+                    </section>
+                </Card>
+            </section>
+
+            <section className='grid gap-4 grid-cols-3 m-4'>
+                
+                <Card border>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Id-location">ID</p>
+                        <p>{weather?.id}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Country">Country</p>
+                        <p>{weather?.sys.country}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Coordinate">Coordinate</p>
+                        <p>{"lat:"+weather?.coord.lat}; {"lon:"+weather?.coord.lon}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Weather">Weather</p>
+                        <p className="id-icon">{weather?.weather[0].description}</p>                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Feelslike">{"Feels Like(°C)" }</p>
+                        <p>{weather?.main.feels_like+"°C"}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Pressure">{"Pressure(hPa)"}</p>
+                        <p>{weather?.main.pressure+"hPa"}</p>
+                    </section>
+                </Card>
+                 
+            </section>
+
+            <Card border={false} className={'flex flex-wrap flex-col items-center m-4'}>
+                <p className="mb-1 text-center text-sm text-slate-500">let's try checking the weather in another place</p>
+                <Button label="Register Now" onClick={() => Navigate('/Login')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 mt-3 py-2 text-sm font-medium"/>
+            </Card>
+
+
+            {/* <section className="weather-image">
                 <img className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
                 <p className="id-icon">{weather?.weather[0].description}</p>
             </section>
@@ -167,7 +254,7 @@ const WeatherSub: React.FC = () => {
                         <Button label="Next" onClick={() => Navigate('/ConnectApi')}className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
 
                     </Card>
-            </Card> 
+            </Card>  */}
 
         </main>
     )

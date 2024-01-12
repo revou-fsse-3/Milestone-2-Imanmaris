@@ -155,37 +155,6 @@ const ProtectContainer: React.FC = () => {
                         <p>{weather?.main.pressure+"hPa"}</p>
                     </section>
                 </Card>
-
-
-                        {/*<Card border={false} className={'flex flex-wrap flex-col items-center'}>
-                            <table >
-                            <thead >
-                                <tr >
-                                    <th>Country</th>
-                                    <th>Coordinate</th>
-                                    <th>Weather</th>
-                                    <th>Main</th>
-                                    <th>Feels Like</th>
-                                    <th>Pressure</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                    <tr >
-                                        <td>{weather?.sys.country}</td>
-                                        <td>{"lat:"+weather?.coord.lat}; {"lon:"+weather?.coord.lon}</td>
-                                        <td className={'flex justify-center '}>
-                                        <img className="h-8 w-auto bg-violet-100 hover:bg-violet-300 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
-                                        </td>
-                                        <td>{weather?.weather[0].main}</td>
-                                        <td>{weather?.main.feels_like+"°C"}</td>
-                                        <td>{weather?.main.pressure+"hPa"}</td>
-                                        
-                                    </tr>
-                            </tbody>
-                            </table> 
-                        </Card>*/}
                  
             </section>
 

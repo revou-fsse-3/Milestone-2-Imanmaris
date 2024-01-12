@@ -158,7 +158,9 @@ const HomeContainer: React.FC = () => {
             <Card border={false} className={'flex flex-wrap flex-col items-center m-4'}>
                 <p className="mb-1 text-center text-sm text-slate-500">let's try to Weather Forecast List</p>
                 <Button label="Press and Try Now" onClick={() => Navigate('/ConnectApi')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 mt-3 py-2 text-sm font-medium"/>
+                <Button label="Another Page of Weather Finder" onClick={() => Navigate('/WeatherApp')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
                 <Button label="Home" onClick={() => Navigate('/')}className="text-gray-500 hover:bg-sky-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+
             </Card>
 
         </main>
