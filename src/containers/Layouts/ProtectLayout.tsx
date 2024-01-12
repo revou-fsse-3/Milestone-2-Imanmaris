@@ -5,7 +5,7 @@ import { Footer } from "../../components";
 
 const ProtectLayout = () => {
 
-    const token = localStorage.getItem("customtoken");
+    const token = localStorage.getItem("customToken");
     if (token) {
 
         return (

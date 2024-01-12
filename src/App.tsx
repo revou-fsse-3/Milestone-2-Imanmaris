@@ -14,7 +14,7 @@ function App() {
       children: [
         {
           path:'/',
-          element:<HomeContainer/>
+          element:<ProtectContainer/>
         },
         {
           path:'/Login',
@@ -27,10 +27,6 @@ function App() {
         {
           path:'/Product-specification', 
           element:<ProductContainer/>
-        },
-        {
-          path:'/Category', 
-          element:<ProtectContainer/>
         }
 
       ]
@@ -41,22 +37,18 @@ function App() {
     },
     {
       element: <WeatherLayout/>,
-      children: [(
+      children: [
         {
           path:'/WeatherApp', 
           element:<WeatherApp/>
-      }
-      )]
+        },
+        {
+          path:'/Category', 
+          element:<HomeContainer/>
+        }
+      ]
     }
-    // {
-    //   element: <ProtectLayout/>,
-    //   children: [(
-    //     {
-    //       path:'/ConnectApi', 
-    //       element:<ApiContainer/>
-    //     }
-    //   )]
-    // }
+
   ])
 
   return (

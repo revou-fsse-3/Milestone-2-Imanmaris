@@ -1,92 +1,187 @@
-// import React, { useState,useRef, useEffect } from 'react';
-// import axios from 'axios';
-// import { Card } from '..';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Card } from '..';
+
+interface LocationData {
+  lat: number;
+  lon: number;
+  localtime: number;
+  name: string;
+  country:string;
+
+}
+
+interface ConditionData{
+    text:string;
+    icon:string;
+    code: number;
+}
+
+interface CurrentData {
+  speed: number;
+  condition: ConditionData;
+  wind_mph: number;
+  pressure_mb:number;
+  humidity: number;
+  feelslike_c:number;
+  temp_c: number;
+  
+}
 
 
+interface AppData {
+  location: LocationData;
+  current: CurrentData;
+}
 
-// interface MainData {
-//     humidity: number;
-//     temp_max: number;
-//     temp: number;
-// }
+const ListData: React.FC = () => {
+  const [api_key] = useState<string>("6cd366cb3d634eb8b0c21922241201");
+  const [data, setData] = useState<AppData[]>([]);
 
-// interface WindData {
-//     speed: number;
-// }
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=Indonesia&days=7`);
+      setData([response.data]);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-// interface WeatherData {
-//     icon :string;
-//     description : string;
-// }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-// interface AppData {
-//     main : MainData;
-//     weather : {[key:number]: WeatherData};
-//     wind : WindData;
-//     name : string;
-// }
+  return (
+    <main >
+        <section>
+            <Card border={false}>
+                {data.map((item, index) => (
+                    <section key={index} className="flex flex-wrap flex-col items-center">
+                        <img
+                        className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full"
+                        src= {item.current.condition.icon}
+                        alt="logo cuaca"
+                        />
+                        <p className="description">{item.current.condition.text}</p>
+                        <p>{item.location.country}</p>
+                        <div className='flex gap-4'>
+                            <p>Temperature: {item.current.temp_c}°C</p>
+                            <p>Humidity: {item.current.humidity}%</p>
+                            <p>Wind Speed: {item.current.wind_mph} m/s</p>
+                        </div>
+                    </section>
+                ))}
+            </Card>
+        </section>
 
-// const DataComponent: React.FC = () => {
-//     const [api_key] = useState<string>("6e33f37dca5a8579ee77037a9d2d2929");
-//     const [weather, setWeather] = useState<AppData | null>(null);
-//     const searchRef = useRef<HTMLInputElement | null>(null);
-//     const [data, setData] = useState<AppData[]>([]);
+        <section className='grid gap-4 grid-cols-2'>
+            <Card border>
+                {data.map((item, index) => (
+                    <section key={index} className="flex flex-wrap flex-col items-center">
+                        <img
+                        className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full"
+                        src= {item.current.condition.icon}
+                        alt="logo cuaca"
+                        />
+                        <p className="description">{item.current.condition.text}</p>
+                        <p>{item.location.country}</p>
+                        <p>Temperature: {item.current.temp_c}°C</p>
+                        <p>Humidity: {item.current.humidity}%</p>
+                        <p>Wind Speed: {item.current.wind_mph} m/s</p>
+                    </section>
+                ))}
+            </Card>
 
-//     const search = async () => {
-//         try {
-//             let location = searchRef?.current?.value ? searchRef?.current?.value : "Indonesia";
-//             let response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${api_key}`);
-//             setWeather(response.data);
-//         } catch (error) {
-//             console.error('Error fetching data:', error);
-//             // Handle the error (e.g., show an error message to the user)
-//         }
-//     };
+            <Card border>
+                {data.map((item, index) => (
+                    <section key={index} className="flex flex-wrap flex-col items-center">
+                        <img
+                        className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full"
+                        src= {item.current.condition.icon}
+                        alt="logo cuaca"
+                        />
+                        <p className="description">{item.current.condition.text}</p>
+                        <p>{item.location.country}</p>
+                        <p>Temperature: {item.current.temp_c}°C</p>
+                        <p>Humidity: {item.current.humidity}%</p>
+                        <p>Wind Speed: {item.current.wind_mph} m/s</p>
+                    </section>
+                ))}
+            </Card>
 
-//     const fetchData = async () => {
-//         try {
-//             const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${api_key}`);
-//             setData([response.data]);
-//         } catch (error) {
-//             console.error('Error fetching data:', error);
-//         }
-//     };
+            <Card border>
+                {data.map((item, index) => (
+                    <section key={index} className="flex flex-wrap flex-col items-center">
+                        <img
+                        className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full"
+                        src= {item.current.condition.icon}
+                        alt="logo cuaca"
+                        />
+                        <p className="description">{item.current.condition.text}</p>
+                        <p>{item.location.country}</p>
+                        <p>Temperature: {item.current.temp_c}°C</p>
+                        <p>Humidity: {item.current.humidity}%</p>
+                        <p>Wind Speed: {item.current.wind_mph} m/s</p>
+                    </section>
+                ))}
+            </Card>
 
-//     useEffect(() => {
-//         fetchData();
-//     }, []);
+            <Card border>
+                {data.map((item, index) => (
+                    <section key={index} className="flex flex-wrap flex-col items-center">
+                        <img
+                        className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full"
+                        src= {item.current.condition.icon}
+                        alt="logo cuaca"
+                        />
+                        <p className="description">{item.current.condition.text}</p>
+                        <p>{item.location.country}</p>
+                        <p>Temperature: {item.current.temp_c}°C</p>
+                        <p>Humidity: {item.current.humidity}%</p>
+                        <p>Wind Speed: {item.current.wind_mph} m/s</p>
+                    </section>
+                ))}
+            </Card>
+        </section>
 
-//     return (
-//         <main className="container">
-//             {/* ... */}
-//             <section className="data-container">
-//                 {/* ... */}
-//             </section>
-//             <Card border={false} className={'flex flex-wrap flex-col items-center'}>
-//                 {/* ... */}
-//                 <table>
-//                     <thead>
-//                         <tr>
-//                             <th>Location</th>
-//                             <th>Temperature</th>
-//                             <th>Status</th>
-//                             <th>Wind Speed</th>
-//                         </tr>
-//                     </thead>
-//                     <tbody>
-//                         {data.map((item) => (
-//                             <tr key={item.name}>
-//                                 <td>{item.name}</td>
-//                                 <td>{item.main.temp}</td>
-//                                 <td>{item.main.humidity}</td>
-//                                 <td>{item.wind.speed}</td>
-//                             </tr>
-//                         ))}
-//                     </tbody>
-//                 </table>
-//             </Card>
-//         </main>
-//     );
-// };
+        {/* <section className='flex'>
+            <Card border>
+                {data.map((item, index) => (
+                    <section key={index} className="flex flex-wrap flex-col items-center">
+                        <img
+                        className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full"
+                        src= {item.current.condition.icon}
+                        alt="logo cuaca"
+                        />
+                        <p className="description">{item.current.condition.text}</p>
+                        <p>{item.location.country}</p>
+                        <p>Temperature: {item.current.temp_c}°C</p>
+                        <p>Humidity: {item.current.humidity}%</p>
+                        <p>Wind Speed: {item.current.wind_mph} m/s</p>
+                    </section>
+                ))}
+            </Card>
 
-// export default DataComponent;
+            <Card border>
+                {data.map((item, index) => (
+                    <section key={index} className="flex flex-wrap flex-col items-center">
+                        <img
+                        className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full"
+                        src= {item.current.condition.icon}
+                        alt="logo cuaca"
+                        />
+                        <p className="description">{item.current.condition.text}</p>
+                        <p>{item.location.country}</p>
+                        <p>Temperature: {item.current.temp_c}°C</p>
+                        <p>Humidity: {item.current.humidity}%</p>
+                        <p>Wind Speed: {item.current.wind_mph} m/s</p>
+                    </section>
+                ))}
+            </Card>
+        </section> */}
+
+    </main>
+  );
+};
+
+export default ListData;

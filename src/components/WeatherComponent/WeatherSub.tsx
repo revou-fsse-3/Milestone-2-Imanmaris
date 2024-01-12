@@ -8,7 +8,7 @@ import angin_icon from "../../components/Assets/angin.png";
 import humidity_icon from "../../components/Assets/humidity.png";
 import suhu_max from "../../components/Assets/suhumax.png";
 import DateUpdate from "./DateUpdate";
-import *as Yup from "yup";
+// import *as Yup from "yup";
 
 
 interface MainData {
@@ -60,9 +60,9 @@ const WeatherSub: React.FC = () => {
     const searchRef = useRef<HTMLInputElement | null>(null);
     const Navigate = useNavigate();
 
-    const searchSchema = Yup.object().shape({
-        searchTerm: Yup.string().required("Search term is required"),
-    });
+    // const searchSchema = Yup.object().shape({
+    //     searchTerm: Yup.string().required("Search term is required"),
+    // });
     // console.log(weather)
 
     const search = async () => {
@@ -75,7 +75,7 @@ const WeatherSub: React.FC = () => {
         let data: AppData = await response.json();
         setWeather(data)
         
-        // console.log (data);
+        console.log (data);
         
     };
     

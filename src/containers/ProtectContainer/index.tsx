@@ -1,347 +1,201 @@
-// import { Card } from "../../components";
-// import { useEffect, useState } from "react";
-// import { userProfile } from './../../api/authApi';
-
-// interface DataProps {
-//     id: number;
-//     name:string;
-//     email: string;
-//     password: string;
-// }
-
-// const ProtectContainer =() => {
-
-//     const token = localStorage.getItem('token') ?? '';
-//     const [users, setCategories] = useState<DataProps[]>([]);
-  
-//     useEffect(() => {
-//       const fetchCategories = async () => {
-//         try {
-//           const response = await userProfile(token);
-//           setCategories(response.data.data);
-          
-//           console.log('Data diri anda terdata disini !')
-//         } catch (error) {
-//           console.error(error)
-//         }
-//       };
-//       fetchCategories();
-//     },[token]);
-  
-  
-//     return (
-//       <Card border= {false} className={'flex flex-wrap flex-col items-center'}>
-        
-//         <h2>Data diri yang tersimpan</h2>
-//         <table>
-//           <thead>
-//             <tr>
-//               <th>ID</th>
-//               <th>Name</th>
-//               <th>Email</th>
-//               <th>Password</th>
-//             </tr>
-//           </thead>
-
-//           <tbody>
-//             {users.map((profile) => (
-//               <tr key={profile.id}>
-//                 <td>{profile.id}</td>
-//                 <td>{profile.name}</td>
-//                 <td>{profile.password}</td>
-//               </tr>
-//             ))}
-
-//             <td></td>
-            
-//           </tbody>
-//         </table>
-//       </Card>
-//     )
-// }
-// export default ProtectContainer
-
-
-import { Text, Card, Input, Button } from '../../components';
-import { useEffect, useState } from 'react';
-import { deleteCategory } from '../../api/categoryApi';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DateUpdate from "../../components/WeatherComponent/DateUpdate";
+import { Card, Button } from "../../components";
+import angin_icon from "../../components/Assets/angin.png";
+import humidity_icon from "../../components/Assets/humidity.png";
+import suhu_max from "../../components/Assets/suhumax.png";
 
-interface CategoryProps {
-    name?: string;
-    is_active?: boolean;
+
+interface MainData {
+    humidity: number;
+    temp_max: number;
+    temp: number;
+    pressure: number;
+    feels_like: number;
 }
-interface Category {
-    id: string;
-    name: string;
-    is_active: boolean;
+
+interface WindData {
+    speed: number;
 }
 
-const ProtectContainer = () => {
-    const token = localStorage.getItem('token') ?? '';
-    const [categories, setCategory] = useState<Category[]>([]);
-    const [editingCategory, setEditingCategory] = useState<Category | null>(null);
-    const Navigate= useNavigate();
+interface WeatherData {
+    icon :string;
+    description : string;
+    main :  string;
+}
 
-    const fetchCategories = async () => {
-        try {
-            const response = await fetch('https://mock-api.arikmpt.com/api/category', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                method: 'GET',
-            })
-            const data = await response.json()
-            setCategory?.(data.data)
-        }
-        catch (error) {
-            console.error('Error fetching categories:', error);
-        }
-    }
+interface CoordinateData {
+    lat :number;
+    lon : number;
+}
 
-    useEffect(
-        () => {
-            fetchCategories()
-            if (editingCategory) {
-                formMik.setValues({
-                    name: editingCategory.name,
-                    is_active: editingCategory.is_active
-                })
-            }
-        }, [editingCategory]
-    )
-
-    const formMik = useFormik({
-        initialValues: {
-            name: '',
-            is_active: true
-        },
-        onSubmit: async (values, { resetForm }) => {
-            console.log('submitting form with values:', values)
-            if (editingCategory) {
-                await updateCategory({ ...editingCategory, ...values });
-            } else {
-                await createCategory(values);
-            }
-            resetForm();
-            setEditingCategory(null);
-        },
-        validationSchema: yup.object({
-            name: yup.string().required(),
-            is_active: yup.boolean().required(),
-        })
-    })
-
-    const createCategory = async (data: CategoryProps) => {
-        try {
-            const response = await fetch('https://mock-api.arikmpt.com/api/category/create', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': "application/json"
-                },
-                method: 'POST',
-                body: JSON.stringify({
-                    name: data.name,
-                    is_active: data.is_active
-                })
-            })
-            const newCategory = await response.json()
-            fetchCategories()
-            console.log(newCategory)
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-
-    const updateCategory = async (data: Category) => {
-        try {
-            const response = await fetch('https://mock-api.arikmpt.com/api/category/update', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                method: 'PUT',
-                body: JSON.stringify({
-                    id: data.id,
-                    name: data.name,
-                    is_active: data.is_active
-                })
-            });
+interface SysData {
     
-            if (response.status !== 204) {
-                const updatedCategory = await response.json()
-                console.log('Category updated successfully with data:', updatedCategory)
-            } else {
-                console.log('Category updated successfully')
-            }
-    
-            fetchCategories()
-        } catch (error) {
-            console.error('Error updating category:', error)
-        }
-    }
-       
+country: string
+id: number
+sunrise: number
+sunset: number
+}
 
-    const editCategory = async (id: string) => {
-        try {
-            const response = await fetch(`https://mock-api.arikmpt.com/api/category/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': "application/json"
-                },
-                method: 'GET'
-            });
-    
-            if (response.ok) {
-                const responseData = await response.json();
-                const getCategory = responseData.data; // Access the nested 'data' property
-                console.log('editing category:', getCategory)
-                if (getCategory && typeof getCategory.is_active === 'boolean') {
-                    setEditingCategory(getCategory);
-                } else {
-                    console.error('Invalid category data:', getCategory);
-                } 
-            }
-        } catch (error) {
-            console.error('Error fetching category:', error);
-        }
+interface AppData {
+    main : MainData;
+    weather : {[key:number]: WeatherData};
+    wind : WindData;
+    name : string;
+    coord : CoordinateData;
+    sys : SysData
+    id:number;
+}
+
+
+const ProtectContainer: React.FC = () => {
+
+    const [api_key] = useState<string>("6e33f37dca5a8579ee77037a9d2d2929");
+    const [weather, setWeather] = useState<AppData>();
+    const Navigate = useNavigate();
+
+    const fetchDetail = async () => {
+
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=Indonesia&units=metric&appid=${api_key}`;
+        let response = await fetch(url);
+        let data: AppData = await response.json();
+        setWeather(data)  
+
+        console.log (data)
+        // try {
+        //     const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Indonesia&units=metric&appid=${api_key}`);
+        //     setWeather([response.data]);
+        //   } catch (error) {
+        //     console.error('Error fetching data:', error);
+        //   }
+        
     };
-
-    // const deleteCategory = async (id: string) => {
-    //     try {
-    //         return await fetch(`https://mock-api.arikmpt.com/api/category/${id}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //             method: 'DELETE'
-    //         });
-    //         fetchCategories()
-    //     }
-    //     catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-
-    const handleDelete = async (categoryId: string) => {
-      try {
-        await deleteCategory(categoryId, token);
-        const updatedCategories = categories.filter((category) => category.id !== categoryId);
-        setCategory(updatedCategories);
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    // const { errors, values, handleChange, handleSubmit } = formMik;
-    // const { name, is_active } = values;
-    // const token = localStorage.getItem("token")
+    
+        useEffect(() => {
+            fetchDetail();
+        }, []);
 
     return (
-      <>
-        <Card border className={'flex flex-wrap flex-col items-center'}>
-            <h2 className="w-full text-xl bg-sky-400/[.9] text-white flex justify-center rounded-md">Create Category</h2>
-            <Card border={false}>
-                <form onSubmit={formMik.handleSubmit}>
-                    <div>
-                        <Text>{'Category Name'}</Text>
-                        <Input
-                            className="border-solid border-2 border-sky-500 rounded-md w-full"
-                            name={'name'}
-                            type="text"
-                            value={editingCategory ? editingCategory.name : formMik.values.name}
-                            onChange={(e) => {
-                                if (editingCategory) {
-                                // Update the editingCategory directly
-                                setEditingCategory({
-                                    ...editingCategory,
-                                    name: e.target.value,
-                                });
-                                } else {
-                                // Update formMik.values
-                                formMik.handleChange('name')(e);
-                                }
-                            }}
-                        /> {formMik.errors.name && <Text>{formMik.errors.name}</Text>}
-                    </div>
-                    <div>
-                        <Text>{'Status'}</Text>
-                        <label>
-                            <select
-                                className="border-solid border-2 border-sky-500 rounded-md w-full"
-                                name="is_active"
-                                value={
-                                    editingCategory
-                                    ? editingCategory.is_active.toString()
-                                    : formMik.values.is_active.toString()
-                                }
-                                onChange={(e) => {
-                                    if (editingCategory) {
-                                    // Update the editingCategory directly
-                                    setEditingCategory({
-                                        ...editingCategory,
-                                        is_active: e.target.value === 'true',
-                                    });
-                                    } else {
-                                    // Update formMik.values
-                                    formMik.handleChange('is_active')(e);
-                                    }
-                                }}
-                            >
-                                <option value="">-- Select --</option>
-                                <option value='true'>Active</option>
-                                <option value='false'>Inactive</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div>
-                    <Button label={'Create Category'} type={"submit"} className="w-full py-1 text-sm bg-green-400 opacity-90 mt-3 text-black-300 hover:bg-green-700 hover:text-white rounded-md"/>
-                    <Button label={'Save Edit'} type={"submit"} className="w-full py-1 text-sm bg-sky-400 opacity-90 mt-3 text-black-300 hover:bg-sky-700 hover:text-white rounded-md"/>
-                    </div>
-                    <div className={'mt-5 flex flex-wrap flex-col items-center'}>
-                    <Button label="Previous/ Back Page" onClick={() => Navigate('/Category')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
-                    <Button label="Home Page" onClick={() => Navigate('/')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
-                    </div>
-                                
-                </form>
+        <main className="bg-sky-50/[.9] rounded-b-xl">
+            <section>
+                <Card border={false}>
+                    <section className="weather-image">
+                        <img className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
+                    </section>
+
+                    <section className="weather-status">
+                        <h1 className="weather-temperature">{weather?.main.temp +"°C"}</h1>
+                        <DateUpdate/>
+                        <h2 className="weather-location">{weather?.name}</h2>
+                    </section>
+
+                    <section className="data-container">
+                        <div className="element">
+                            <img src={humidity_icon} alt="logo kelembaban udara"/>
+                            <div className="data">
+                                <h3 className="humidity-percent">{weather?.main.humidity+"%"}</h3>
+                                <p className="text">Kelembaban</p>
+                            </div>
+                        </div>
+
+                        <div className="element">
+                            <img src={suhu_max} alt="logo temperatur maksimal"/>
+                            <div className="data">
+                                <h3 className="temperature-max">{weather?.main.temp_max+"°C"}</h3>
+                                <p className="text">Max-Temperature</p>
+                            </div>
+                        </div>
+
+                        <div className="element">
+                            <img src={angin_icon} alt="logo hembusan angin"/>
+                            <div className="data">
+                                <h3 className="wind-speed">{weather?.wind.speed + "MpH"}</h3>
+                                <p className="text">Kecepatan Angin</p>
+                            </div>
+                        </div>
+                    </section>
+                </Card>
+            </section>
+
+            <section className='grid gap-4 grid-cols-3 m-4'>
+                
+                <Card border>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Id-location">ID</p>
+                        <p>{weather?.id}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Country">Country</p>
+                        <p>{weather?.sys.country}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Coordinate">Coordinate</p>
+                        <p>{"lat:"+weather?.coord.lat}; {"lon:"+weather?.coord.lon}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Weather">Weather</p>
+                        <p className="id-icon">{weather?.weather[0].description}</p>                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Feelslike">{"Feels Like(°C)" }</p>
+                        <p>{weather?.main.feels_like+"°C"}</p>
+                    </section>
+                </Card>
+                <Card border>
+                    <section className="flex flex-wrap flex-col items-center">
+                        <p className="Pressure">{"Pressure(hPa)"}</p>
+                        <p>{weather?.main.pressure+"hPa"}</p>
+                    </section>
+                </Card>
+
+
+                        {/*<Card border={false} className={'flex flex-wrap flex-col items-center'}>
+                            <table >
+                            <thead >
+                                <tr >
+                                    <th>Country</th>
+                                    <th>Coordinate</th>
+                                    <th>Weather</th>
+                                    <th>Main</th>
+                                    <th>Feels Like</th>
+                                    <th>Pressure</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                    <tr >
+                                        <td>{weather?.sys.country}</td>
+                                        <td>{"lat:"+weather?.coord.lat}; {"lon:"+weather?.coord.lon}</td>
+                                        <td className={'flex justify-center '}>
+                                        <img className="h-8 w-auto bg-violet-100 hover:bg-violet-300 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
+                                        </td>
+                                        <td>{weather?.weather[0].main}</td>
+                                        <td>{weather?.main.feels_like+"°C"}</td>
+                                        <td>{weather?.main.pressure+"hPa"}</td>
+                                        
+                                    </tr>
+                            </tbody>
+                            </table> 
+                        </Card>*/}
+                 
+            </section>
+
+            <Card border={false} className={'flex flex-wrap flex-col items-center m-4'}>
+                <p className="mb-1 text-center text-sm text-slate-500">let's try checking the weather in another place</p>
+                <Button label="Register Now" onClick={() => Navigate('/Login')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 mt-3 py-2 text-sm font-medium"/>
             </Card>
-        </Card>
 
-        <Card border className={'flex flex-wrap flex-col items-center'}>
-          <h2 className="w-full text-xl bg-sky-400/[.9] text-white flex justify-center rounded-md">List Category</h2>
-          <Card border={false}>
-
-                <table>
-                    <thead >
-                        <tr >
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {categories.map((data) => (
-                            <tr key={data.id}>
-                                <td>{data.id}</td>
-                                <td>{data.name}</td>
-                                <td>{data.is_active? 'active' : 'inactive'}</td>
-                                <td>
-                                    <Button label={"Edit"} type={"submit"} className="w-full py-1 text-sm bg-blue-400 opacity-90 mt-3 text-black-300 hover:bg-blue-700 hover:text-white rounded-md" onClick={() => editCategory(data.id)}>Edit</Button>
-                                    <Button label={"Delete"} type={"submit"} className="w-full py-1 text-sm bg-red-400 opacity-90 mt-3 text-black-300 hover:bg-red-700 hover:text-white rounded-md" onClick={() => handleDelete(data.id)}>Delete</Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-            </Card> 
-          </Card>                       
-      </>
-
-
-    )    
+        </main>
+    )
 }
+
 export default ProtectContainer

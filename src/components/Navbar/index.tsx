@@ -34,8 +34,9 @@ const Navbar = () => {
                     <div className="flex space-x-4">
                         <button onClick={() => Navigate('/')} className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</button>
                         <button onClick={() => Navigate('/Login')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</button>
-                        <button onClick={() => Navigate('/WeatherApp')} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Weather Forecast</button>
-                        <button onClick={() => Navigate('/ConnectApi')} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Weather List</button>
+                        <button onClick={() => Navigate('/Category')} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Weather Location Search</button>
+                        <button onClick={() => Navigate('/ConnectApi')} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Weather Forecast List</button>
+                        {/* <button onClick={() => Navigate('/Category')} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Percobaan</button> */}
                     </div>
                     </div>
                 </div>               
