@@ -73,7 +73,7 @@ const ContactContainer = () => {
             <Card border className={'flex flex-wrap flex-col items-center bg-sky-50/[.9]'}>
                 <h1 className="w-full p-5 text-3xl bg-sky-100/[.9] text-black flex justify-center rounded-md">REGISTER HERE</h1>
 
-                <Card border={false} className="text-3xl mt-10">
+                <Card border={false} className="text-xl mt-10">
                     <DateUpdate/>
                 </Card>
 
@@ -120,12 +120,12 @@ const ContactContainer = () => {
                 
                             <section className={'flex flex-wrap flex-col items-center'}>
                                 <p className="mb-1 text-center text-sm text-slate-500"><b> Home Menu </b></p>
-                                <Button label="Press here" onClick={() => Navigate('/ProtectContainer')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+                                <Button label="Press here" onClick={() => Navigate('/')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
                             </section>
 
                             <section className={'flex flex-wrap flex-col items-center'}>
-                                <p className="mb-1 text-center text-sm text-slate-500"><b> Weather forecast menu </b></p>
-                                <Button label="Press here" onClick={() => Navigate('/WeatherApp')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
+                                <p className="mb-1 text-center text-sm text-slate-500"><b> Weather Finder Menu </b></p>
+                                <Button label="Press here" onClick={() => Navigate('/Category')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"/>
                             </section>
 
                         </Card>
