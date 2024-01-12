@@ -50,7 +50,7 @@ const ContactContainer = () => {
                 console.log('Silahkan anda sudah login');
         
                 // Navigate to the desired route upon successful login
-                Navigate('/WeatherApp');
+                Navigate('/Category');
             } catch (error) {
                 console.error(error);
             }
