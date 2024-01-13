@@ -52,7 +52,7 @@ const HomeContainer: React.FC = () => {
        
         console.log(location);
 
-        let url = `http://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${location}&days=7`;
+        let url = `https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${location}&days=7`;
         let response = await fetch(url);
         let data: AppData = await response.json();
         setWeather(data)  
