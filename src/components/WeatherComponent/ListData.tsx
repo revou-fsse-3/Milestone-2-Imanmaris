@@ -39,7 +39,7 @@ interface ForecastDay {
 }
 
 interface ForcaseData {
-    forecasteday : {[key:number]:ForecastDay}
+    forecastday : {[key:number]:ForecastDay}
 }
 
 interface AppData {
@@ -151,7 +151,7 @@ const ListData: React.FC = () => {
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Senin"}</h2>
-                        <p className='mb-3'>{item.forecast.forecasteday[2].date}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[2].date}</p>
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
                         src= {item.current.condition.icon}

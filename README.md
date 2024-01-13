@@ -1,7 +1,7 @@
 
 # Assignment Week-11 (React Route + TypeScript + Vite + React + etc )
 
-<h1 align="center"> On Progress.. 💥</h1>
+<h1 align="center"> Weather Finder App. 💥</h1>
 
 ### Deployment with Netlify
 
