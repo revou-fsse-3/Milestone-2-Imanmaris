@@ -134,47 +134,47 @@ const WeatherSub: React.FC = () => {
                 </Card>
             </section>
 
-            <section className='grid gap-4 grid-cols-3 m-4'>
+            <section className='grid gap-2 grid-cols-3 m-4 mt-8'>
                 
                 <Card border>
                     <section className="flex gap-2 flex-wrap flex-col items-center">
-                        <p className="Id-location">ID</p>
+                        <p className="Id-location font-medium">ID</p>
                         <p>{weather?.id}</p>
                     </section>
                 </Card>
                 <Card border>
                     <section className="flex gap-2 flex-wrap flex-col items-center">
-                        <p className="Country">Country</p>
+                        <p className="Country font-medium">Country</p>
                         <p>{weather?.sys.country}</p>
                     </section>
                 </Card>
                 <Card border>
-                    <section className="flex flex-wrap flex-col items-center">
-                        <p className="Coordinate">Coordinate</p>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Coordinate font-medium">Coordinate</p>
                         <p>{"lat:"+weather?.coord.lat}; {"lon:"+weather?.coord.lon}</p>
                     </section>
                 </Card>
                 <Card border>
-                    <section className="flex flex-wrap flex-col items-center">
-                        <p className="Weather">Weather</p>
-                        <p className="id-icon">{weather?.weather[0].description}</p>                    </section>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Weather font-medium">Weather</p>
+                        <p className="id-icon text-sm">{weather?.weather[0].description}</p>                    </section>
                 </Card>
                 <Card border>
-                    <section className="flex flex-wrap flex-col items-center">
-                        <p className="Feelslike">{"Feels Like(°C)" }</p>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Feelslike font-medium">{"Feels Like(°C)" }</p>
                         <p>{weather?.main.feels_like+"°C"}</p>
                     </section>
                 </Card>
                 <Card border>
-                    <section className="flex flex-wrap flex-col items-center">
-                        <p className="Pressure">{"Pressure(hPa)"}</p>
-                        <p>{weather?.main.pressure+"hPa"}</p>
+                    <section className="flex gap-2 flex-wrap flex-col items-center">
+                        <p className="Pressure font-medium">{"Pressure(hPa)"}</p>
+                        <p >{weather?.main.pressure+"hPa"}</p>
                     </section>
                 </Card>
                  
             </section>
 
-            <Card border={false} className={'flex flex-wrap flex-col items-center m-4'}>
+            <Card border={false} className={'flex flex-wrap flex-col items-center m-4 mt-10 pt-10'}>
                 <p className="mb-1 text-center text-sm text-slate-500">let's try checking the weather in another place</p>
                 <Button label="Register Now" onClick={() => Navigate('/Login')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 mt-3 py-2 text-sm font-medium"/>
             </Card>

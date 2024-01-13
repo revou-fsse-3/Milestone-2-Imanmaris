@@ -81,7 +81,7 @@ const ProtectContainer: React.FC = () => {
             <section>
                 <Card border={false}>
                     <section className="weather-image">
-                        <img className="bg-violet-100 hover:bg-violet-200 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
+                        <img className="bg-violet-10 hover:bg-violet-200 active:bg-violet-700 rounded-full" src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="logo cuaca"/>
                     </section>
 
                     <section className="weather-status">
@@ -118,7 +118,7 @@ const ProtectContainer: React.FC = () => {
                 </Card>
             </section>
 
-            <section className='grid gap-4 grid-cols-3 m-4'>
+            <section className='grid gap-4 grid-cols-3 m-4 mt-10'>
                 
                 <Card border>
                     <section className="flex gap-2 flex-wrap flex-col items-center">
@@ -158,7 +158,7 @@ const ProtectContainer: React.FC = () => {
                  
             </section>
 
-            <Card border={false} className={'flex flex-wrap flex-col items-center m-4'}>
+            <Card border={false} className={'flex flex-wrap flex-col items-center m-4 mt-10 pt-10 pb-5'}>
                 <p className="mb-1 text-center text-sm text-slate-500">let's try checking the weather in another place</p>
                 <Button label="Register Now" onClick={() => Navigate('/Login')}className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 mt-3 py-2 text-sm font-medium"/>
             </Card>

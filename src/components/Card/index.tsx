@@ -10,7 +10,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 const Card = ({border, children, ...props}: Props) => {
 
     return (
-        <div className={`${border && "rounded border-state-600 border"} p-10 ${props.className}`}>
+        <div className={`${border && "rounded border-state-600 border"} p-1 ${props.className}`}>
            {children} 
         </div>
     )

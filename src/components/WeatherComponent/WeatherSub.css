@@ -5,8 +5,8 @@
     margin:auto;
     margin-top:5px;
     border-radius: 5px 5px 12px 12px;
-    /* background-image: linear-gradient(180deg, rgb(255, 234, 0), rgba(111, 255, 0, 0.682)); */
-    background-image: url("https://img.freepik.com/free-vector/white-3d-modern-background-design_53876-87395.jpg?size=626&ext=jpg&ga=GA1.2.791611781.1699881713&semt=sph");
+    background-image: linear-gradient(180deg, rgba(255, 234, 0, 0.162), rgba(0, 242, 255, 0.178));
+    /* background-image: url("https://img.freepik.com/free-vector/white-3d-modern-background-design_53876-87395.jpg?size=626&ext=jpg&ga=GA1.2.791611781.1699881713&semt=sph"); */
 }
 
 .top-bar{
@@ -19,7 +19,7 @@
 
 .top-bar input {
     display: flex;
-    width: 365px;
+    width: 355px;
     height: 65px;
     background: #ebfffc;
     border: solid;
@@ -131,3 +131,50 @@
 }
 
 
+@media screen and (max-width: 500px) {
+    body {
+      background-color: rgba(144, 219, 238, 0.186);
+    }
+
+    .data h3{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .data p{
+        font-size: 10px;
+    }
+
+    section .grid p{
+        font-size: 10px;
+    }
+
+    .top-bar input {
+        display: flex;
+        width: 300px;
+        height: 45px;
+        background: #ebfffc;
+        border: solid;
+        outline: none;
+        border-radius: 40px;
+        padding-left: 40px;
+        color: #626262;
+        font-size: 20px;
+        font-weight: 400;
+    }
+    
+    .search-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 43px;
+        height: 43px;
+        border: solid;
+        background: #ebfffc;
+        border-radius: 35px;
+        cursor: pointer;
+    }
+  }
