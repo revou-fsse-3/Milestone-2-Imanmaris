@@ -31,7 +31,8 @@ interface HourData {
     pressure_mb:number;
     humidity: number;
     feelslike_c:number;
-    temp_c: number;    
+    temp_c: number;  
+    time: string  
   }
 interface ForecastDay {
     hour: {[key:number]:HourData};
@@ -114,18 +115,17 @@ const ListData: React.FC = () => {
 
   return (
     <main >
-
-        <section className="top-bar mb-10">
+        <section className="top-bar mb-10 ">
                 <input type="text" className="cityInput " placeholder="Search" ref={searchRef} />
                 <div className="search-icon" onClick={()=>{(search())}}>
                     <img className="h-7 w-auto" src={search_icon} alt="search logo"/>
                 </div>
         </section>
 
-        <section>
+        <section className='backdrop-blur-xl bg-white/70 rounded-3xl pb-5'>
             <Card border={false}>
                 {data.map((item, index) => (
-                    <section key={index} className="flex flex-wrap flex-col items-center">
+                    <section key={index} className="flex flex-wrap flex-col items-center mt-10">
                         <h2 className='font-bold text-xl text-slate-500'>{item.location.country}</h2>
                         <p>{item.location.localtime}</p>
 
@@ -147,148 +147,153 @@ const ListData: React.FC = () => {
         </section>
 
         <section className='grid gap-4 grid-cols-2 mt-10'>
-            <Card border>
+            <Card border={false} className='backdrop-blur-xl bg-white/50 rounded-3xl p-3'>
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Senin"}</h2>
-                        <p className='mb-3'>{item.forecast.forecastday[2].date}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[2].hour[7].time}</p>                        
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
-                        src= {item.current.condition.icon}
+                        src= {item.forecast.forecastday[2].hour[7].condition.icon}
                         alt="logo cuaca"
                         />
-                        <p className="description">{item.current.condition.text}</p>
+                        <p className="description">{item.forecast.forecastday[2].hour[7].condition.text}</p>
                         
                         <div className='text-xs flex gap-2 justify-center items-center mt-2'>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/> {item.current.temp_c}°C</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.current.humidity}%</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.current.wind_mph} m/s</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/>{item.forecast.forecastday[2].hour[7].temp_c}°C</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.forecast.forecastday[2].hour[7].humidity}%</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.forecast.forecastday[2].hour[7].wind_mph} m/s</p>
                         </div>
                     </section>
                 ))}
             </Card>
 
-            <Card border>
+            <Card border={false} className='backdrop-blur-xl bg-white/50 rounded-3xl p-3'>
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Selasa"}</h2>
-                        <p className='mb-3'>{item.location.localtime}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[3].hour[7].time}</p>                        
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
-                        src= {item.current.condition.icon}
+                        src= {item.forecast.forecastday[3].hour[7].condition.icon}
                         alt="logo cuaca"
                         />
-                        <p className="description">{item.current.condition.text}</p>
+                        <p className="description">{item.forecast.forecastday[3].hour[7].condition.text}</p>
                         
                         <div className='text-xs flex gap-2 justify-center items-center mt-2'>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/> {item.current.temp_c}°C</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.current.humidity}%</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.current.wind_mph} m/s</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/>{item.forecast.forecastday[3].hour[7].temp_c}°C</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.forecast.forecastday[3].hour[7].humidity}%</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.forecast.forecastday[3].hour[7].wind_mph} m/s</p>
                         </div>
                     </section>
                 ))}
             </Card>
 
-            <Card border>
+            <Card border={false} className='backdrop-blur-xl bg-white/50 rounded-3xl p-3'>
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Rabu"}</h2>
-                        <p className='mb-3'>{item.location.localtime}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[4].hour[7].time}</p>                        
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
-                        src= {item.current.condition.icon}
+                        src= {item.forecast.forecastday[4].hour[7].condition.icon}
                         alt="logo cuaca"
                         />
-                        <p className="description">{item.current.condition.text}</p>
+                        <p className="description">{item.forecast.forecastday[4].hour[7].condition.text}</p>
                         
-                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/> {item.current.temp_c}°C</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.current.humidity}%</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.current.wind_mph} m/s</p>
+                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/>{item.forecast.forecastday[4].hour[7].temp_c}°C</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.forecast.forecastday[4].hour[7].humidity}%</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.forecast.forecastday[4].hour[7].wind_mph} m/s</p>
                         </div>
                     </section>
                 ))}
             </Card>
 
-            <Card border>
+            <Card border={false} className='backdrop-blur-xl bg-white/50 rounded-3xl p-3'>
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Kamis"}</h2>
-                        <p className='mb-3'>{item.location.localtime}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[5].hour[7].time}</p>                        
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
-                        src= {item.current.condition.icon}
+                        src= {item.forecast.forecastday[5].hour[7].condition.icon}
                         alt="logo cuaca"
                         />
-                        <p className="description">{item.current.condition.text}</p>
+                        <p className="description">{item.forecast.forecastday[5].hour[7].condition.text}</p>
                         
-                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/> {item.current.temp_c}°C</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.current.humidity}%</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.current.wind_mph} m/s</p>
+                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/>{item.forecast.forecastday[5].hour[7].temp_c}°C</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.forecast.forecastday[5].hour[7].humidity}%</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.forecast.forecastday[5].hour[7].wind_mph} m/s</p>
                         </div>
                     </section>
                 ))}
-            </Card>      
+            </Card>
 
-            <Card border>
+            <Card border={false} className='backdrop-blur-xl bg-white/50 rounded-3xl p-3'>
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Jumat"}</h2>
-                        <p className='mb-3'>{item.location.localtime}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[6].hour[7].time}</p>                        
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
-                        src= {item.current.condition.icon}
+                        src= {item.forecast.forecastday[6].hour[7].condition.icon}
                         alt="logo cuaca"
                         />
-                        <p className="description">{item.current.condition.text}</p>
+                        <p className="description">{item.forecast.forecastday[6].hour[7].condition.text}</p>
                         
-                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/> {item.current.temp_c}°C</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.current.humidity}%</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.current.wind_mph} m/s</p>
+                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/>{item.forecast.forecastday[6].hour[7].temp_c}°C</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.forecast.forecastday[6].hour[7].humidity}%</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.forecast.forecastday[6].hour[7].wind_mph} m/s</p>
                         </div>
                     </section>
                 ))}
             </Card>
 
-            <Card border>
+            <Card border={false} className='backdrop-blur-xl bg-white/50 rounded-3xl p-3'>
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Sabtu"}</h2>
-                        <p className='mb-3'>{item.location.localtime}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[0].hour[7].time}</p>
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
-                        src= {item.current.condition.icon}
+                        src= {item.forecast.forecastday[0].hour[7].condition.icon}
                         alt="logo cuaca"
                         />
-                        <p className="description">{item.current.condition.text}</p>
+                        <p className="description">{item.forecast.forecastday[0].hour[7].condition.text}</p>
                         
-                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/> {item.current.temp_c}°C</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.current.humidity}%</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.current.wind_mph} m/s</p>
+                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/>{item.forecast.forecastday[0].hour[7].temp_c}°C</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.forecast.forecastday[0].hour[7].humidity}%</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.forecast.forecastday[0].hour[7].wind_mph} m/s</p>
                         </div>
                     </section>
                 ))}
             </Card>
 
-            <Card border className='col-start-1 col-end-3'>
+            <Card border={false} className='col-start-1 col-end-3 backdrop-blur-xl bg-white/50 rounded-3xl p-3'>
                 {data.map((item, index) => (
                     <section key={index} className="flex flex-wrap flex-col items-center">
                         <h2 >{"Minggu"}</h2>
-                        <p className='mb-3'>{item.location.localtime}</p>
+                        <p className='mb-3'>{item.forecast.forecastday[1].hour[7].time}</p>                        
                         <img
                         className="m-5 bg-violet-50 hover:bg-violet-200 active:bg-violet-700 rounded-full p-5"
-                        src= {item.current.condition.icon}
+                        src= {item.forecast.forecastday[1].hour[7].condition.icon}
                         alt="logo cuaca"
                         />
-                        <p className="description">{item.current.condition.text}</p>
+                        <p className="description">{item.forecast.forecastday[1].hour[7].condition.text}</p>
                         
-                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/> {item.current.temp_c}°C</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.current.humidity}%</p>
-                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.current.wind_mph} m/s</p>
+                        <div className='text-xs flex gap-2 justify-center items-center mt-2'>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={suhu_max} alt="logo suhu udara"/>{item.forecast.forecastday[1].hour[7].temp_c}°C</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={humidity_icon} alt="logo kelembaban udara"/>{item.forecast.forecastday[1].hour[7].humidity}%</p>
+                            <p className='flex justify-center items-center'><img className='h-8 w-auto' src={angin_icon} alt="logo kecepatan udara"/>{item.forecast.forecastday[1].hour[7].wind_mph} m/s</p>
                         </div>
                     </section>
                 ))}
-            </Card>       
- 
+            </Card>
+
         </section>
 
         {/* <section className='flex'>
